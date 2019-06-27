@@ -1,5 +1,5 @@
 # scraping
-[danrfq](https://instagram.com/danrfq]'s scraping files.
+[danrfq](https://instagram.com/danrfq)'s scraping files.
 
 ```
 • Search Bible by Query (bible.com)
@@ -10,4 +10,4 @@
 ```
 
 [!]
-> **Any requests/questions? Hit me up at LINE: [danrfq](https://line.me/R/ti/p/~danrfq**
+> **Any requests/questions? Hit me up at LINE: [danrfq](https://line.me/R/ti/p/~danrfq)**
