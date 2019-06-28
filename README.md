@@ -7,6 +7,8 @@
 • AWSubs (awsubs.tv)
 • WibuDesu (wibudesu.com)
 • Samehadaku (samehadaku.tv)
+• Waifu Wednesday + Husbando Friday (jurnalotaku.com)
+• Jadwal Bola Televisi (goal.com)
 ```
 
 [!]
