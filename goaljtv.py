@@ -1,4 +1,4 @@
-from lib.sn import *;import datetime
+from lib.sn import *;import datetime;from humanfriendly import *
 data,dataa=h.bs("https://www.goal.com/id/berita/jadwal-siaran-langsung-sepakbola/1qomojcjyge9n1nr2voxutdc1n").find("div",class_="body"),[]
 hari=["Senin","Selasa","Rabu","Kamis","Jum'at","Sabtu","Minggu"]
 
@@ -9,18 +9,26 @@ def jadwal():
 		jam=infox[0]
 		pertandingan=infox[1]
 		channel=infox[2]
+		if channel.endswith(" "):
+			channel=channel[:-1]
 		infoo=info.title.text.split(",")
 		kompetisi=infoo[2].split(" | ")[0][1:]
 		try:
 			dt=infoo[1][1:].split("/")
-			day=hari[datetime.date(int(dt[0]),int(dt[1]),int(dt[2])).weekday()]
-			month=h.tr(datetime.date(int(dt[0]),int(dt[1]),int(dt[2])).strftime("%B"),"en","id")
-			datee="{}, {} {} 20{}".format(day, dt[0],month,dt[2])
+			dt=[format_number(dt2) for dt2 in dt]
+			brp=datetime.date(int("20"+str(dt[2])),int(dt[1]),int(dt[0]))
+			day=hari[brp.weekday()]
+			month=h.tr(datetime.date(int("20"+str(dt[2])),int(dt[1]),int(dt[0])).strftime("%B"),"en","id")
+			brp=str(brp).split("-")
+			datee="{}, {} {} {}".format(day,dt[0],month,brp[0])
 		except:
-			dt=info.find("time",{"data-dateformat":"monthDay"}).text[2:].split("/")
-			day=hari[datetime.date(int(dt[0]),int(dt[1]),int(dt[2])).weekday()]
-			month=h.tr(datetime.date(int(dt[0]),int(dt[1]),int(dt[2])).strftime("%B"),"en","id")
-			datee="{}, {} {} 20{}".format(day, dt[0],month,dt[2])
+			dt=info.find("time",{"data-dateformat":"dateShort"}).text.split("/")
+			dt=[format_number(dt2) for dt2 in dt]
+			brp=datetime.date(int("20"+str(dt[2])),int(dt[1]),int(dt[0]))
+			day=hari[brp.weekday()]
+			month=h.tr(datetime.date(int("20"+str(dt[2])),int(dt[1]),int(dt[0])).strftime("%B"),"en","id")
+			brp=str(brp).split("-")
+			datee="{}, {} {} {}".format(day,dt[0],month,brp[0])
 		dataa.append({"pertandingan":pertandingan,"kompetisi":kompetisi,"tanggal":datee,"jam":jam,"channel":channel})
 	h.pj(dataa)
 jadwal()
