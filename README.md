@@ -14,7 +14,9 @@
 
 *• Waifu Wednesday + Husbando Friday* (jurnalotaku.com)
 
-*• Jadwal Bola Televisi* (goal.com)
+*• Jadwal Bola Televisi Hari Ini* (goal.com)
+
+*• and many more...*
 
 # Installation
 
