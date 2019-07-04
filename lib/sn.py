@@ -2,7 +2,7 @@ import bs4,requests,json,pafy,googletrans
 mozhdr,z={"User-Agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Safari/537.36"},{"User-Agent":"Mozilla/5.0 (Linux; Android 9; vivo 1902) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.99 Mobile Safari/537.36"}
 class h:
 	def shorturl(link):return requests.get("https://api-ssl.bitly.com/v3/shorten?access_token={}&longUrl={}".format(requests.get("https://md5.pinasthika.com/api/decrypt?value=4ad62d27a08d8b794c867408fdfbc5ea").json()["result"],link)).json()["data"]["url"]
-	def bsverif(link,hdr):
+	def bsverif(link,hdr=True):
 		if hdr == False:return bs4.BeautifulSoup(requests.get(link,verify=False).content, "html5lib")
 		else:return bs4.BeautifulSoup(requests.get(link,verify=False,headers=mozhdr).content, "html5lib")
 	def bs(link,hdr=True):
