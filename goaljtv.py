@@ -14,8 +14,12 @@ def jadwal():
 		infoo=info.title.text.split(",")
 		kompetisi=infoo[2].split(" | ")[0][1:]
 		try:
-			dt=info.time.text.split("/")
-			dt=[format_number(dt2) for dt2 in dt]
+			try:
+				dt=info.time.text.split("/")
+				dt=[format_number(dt2) for dt2 in dt]
+			except:
+				dt=info.find("span",{"data-dateformat":"dateShort"}).text.replace(" ","").split("/")
+				dt=[format_number(dt2) for dt2 in dt]
 			brp=_dt.date(int("20"+str(dt[2])),int(dt[1]),int(dt[0]))
 			day=hari[brp.weekday()]
 			month=h.tr(_dt.date(int("20"+str(dt[2])),int(dt[1]),int(dt[0])).strftime("%B"),"en","id")
@@ -32,4 +36,3 @@ def jadwal():
 		dataa.append({"pertandingan":pertandingan,"kompetisi":kompetisi,"tanggal":datee,"jam":jam,"channel":channel})
 	h.pj(dataa)
 jadwal()
-	
