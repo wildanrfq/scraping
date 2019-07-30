@@ -1,4 +1,4 @@
-import bs4,requests,json,pafy,googletrans,urllib;from datetime import *
+import bs4,requests,json,pafy,googletrans,urllib,humanfriendly,random;from datetime import *
 mozhdr,z,harii={"User-Agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.75 Safari/537.36"},{"User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0"},["Senin","Selasa","Rabu","Kamis","Jum'at","Sabtu","Minggu"]
 class h:
 	jam=str(datetime.now().time()).split(".")[0][:-3]
@@ -24,5 +24,7 @@ class h:
 	def tr(txt,dr,ke):return googletrans.Translator().translate(txt,dest=ke,src=dr).text
 	def w(f,t):
 		with open (f,"w") as x:x.write(str(t))
-	def dl(l,f):
-		urllib.request.urlretrieve(l,f)
+	def dl(l,f):urllib.request.urlretrieve(l,f)
+	def fn(n):return humanfriendly.format_number(n).replace(",",".")
+	def rc(w):return random.choice(w)
+	def ri(w):return random.randint(w)
