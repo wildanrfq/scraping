@@ -1,17 +1,37 @@
 from lib.sn import h
 
-data=h.bsverif("https://www.bmkg.go.id/warning.bmkg")
+data=h.bsverif("https://www.bmkg.go.id/warning.bmkg").findAll("section")[1]
+
 def getInfo():
-	image=data.find("img",class_="img-responsive").get("src")
-	maps=data.find("a",class_="more").get("href")
-	info=data.find("div",class_="col-xs-6 gempabumi-detail no-padding").findAll("li")
-	waktu=info[0].text
+
+	info=data.ul.findAll("li")
+
 	title=data.h3.text
-	magnitudo=info[1].text
-	kedalaman=info[2].text
-	koordinat=info[3].text
-	lokasi=info[4].text
-	tsunami=info[5].text
-	h.pj({"title":title,"image":image,"waktu":waktu,"magnitudo":magnitudo,"kedalaman":kedalaman,"koordinat":koordinat,"tsunami":tsunami,"lokasi":lokasi,"maps":maps})
+
+	waktu=data.h5.text
+
+	magnitudo=info[0].text.split("Magnitudo")[0]
+
+	kedalaman=info[1].text.split("Keda")[0]
+
+	koordinat=info[2].text.replace("LS","LS - ")
+
+	infoo=data.find("div",class_="col-12").findAll("p")
+
+	infoo[3].span.decompose();infoo[1].span.decompose();infoo[2].span.decompose()
+
+	infox=infoo[0].text
+
+	lokasi=infoo[1].text
+
+	arahan=infoo[2].text
+
+	saran=infoo[3].text
+
+	shakemap=infoo[4].a.get("href")
+
+	h.pj({"title":title,"shakemap":shakemap,"waktu":waktu,"magnitudo":magnitudo,"kedalaman":kedalaman,"koordinat":koordinat,"info":infox,"lokasi":lokasi,"arahan":arahan,"saranBMKG":saran})
+
 	
+
 getInfo()
