@@ -3,7 +3,7 @@ import random
 
 def catOfTheDay():
 	data=h.bs("http://www.funnycatpix.com/")
-	title=h.bs(data.base.get("href")+data.a.get("href")).title.text
+	title=h.bs(data.base.get("href")+data.find("div",class_="catphoto").a.get("href")).title.text
 	cat=data.base.get("href")+data.img.get("src")
 	h.pj({"title":title,"image":cat})
 
@@ -19,8 +19,12 @@ def randomFunnyCatVideo():
 			link=link.findAll("a")[9].get("href")
 		else:
 			id=link.split("embed/")[1].split("?")[0]
-			link=h.ytmp4(id)
-		dataa.append({"title":title,"video":link})
+			try:
+				linkk=h.ytmp4(id)
+			except:
+				id=id[:-5].replace("//","")
+				linkk=h.ytmp4(id)
+			dataa.append({"title":title,"video":linkk})
 	h.pj(random.choice(dataa))
 	
 def randomFunnyCatPictures():
@@ -32,5 +36,5 @@ def randomFunnyCatPictures():
 	h.pj(random.choice(dataa))
 		
 catOfTheDay()
-randomFunnyCatVideos()
+randomFunnyCatVideo()
 randomFunnyCatPictures()
