@@ -4,13 +4,10 @@ zodiaks=['Leo', 'Scorpio', 'Libra', 'Cancer', 'Aries', 'Taurus', 'Sagittarius', 
 def getRamalan(zodiak):
 	if zodiak.title() in zodiaks:
 		data=h.bs("http://gemintang.com/ramalan-bintang-setiap-hari/ramalan-{}-hari-ini/".format(zodiak))
-		info=data.findAll("td",{"colspan":2})
-		ramalan=info[1].text[8:].split(" \xa0")[0]
-		hidup=ramalan.split(" Keuangan: ")[0]
-		keuangan=ramalan.split("Keuangan: ")[1].split(" Asmara:")[0].capitalize()
-		asmara=ramalan.split("Asmara: ")[1].capitalize()
-		luckyn=info[2].findAll("td")[2].text[1:][:-1]
-		h.pj({"zodiak":zodiak.title(),"ramalan":{"hidup":hidup,"keuangan":keuangan,"asmara":asmara,"nomorKeberuntungan":luckyn}})
+		info=data.findAll("td",{"colspan":2})[1]
+		ramalan=info.text[8:].split(".  \n")[0]+"."
+		luckyn=data.findAll("table")[1].findAll("tr")[1].td.text[1:][:-1]
+		h.pj({"zodiak":zodiak.title(),"ramalan":ramalan,"nomorKeberuntungan":luckyn})
 	else:
 		h.pj({"error":"Tidak ada zodiak {}. Zodiak yang tersedia hanya {}.".format(zodiak,", ".join(zodiaks))})
 
